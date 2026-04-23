@@ -26,7 +26,7 @@ http:
     - ^https?:\/\/.*meituan.*\/splash.* - reject
 
   script:
-    - match: ^https?:\/\/.*meituan.*\/api\/.*
+    - match: ^https?:\/\/.*meituan.*\/(ad|advert|promotion|marketing).*
       name: mt_clean
       type: response
       require-body: true
@@ -52,4 +52,5 @@ http:
         }
 
 rules:
-  - DOMAIN
+  - DOMAIN-SUFFIX,ad.meituan.com,REJECT
+  - DOMAIN-SUFFIX,ad.dianping.com,REJECT
