@@ -1,6 +1,7 @@
 name: 美团去广告
 desc: 美团外卖去广告（自用）
 author: ChatGPT
+version: 1.0.0
 
 http:
   mitm:
@@ -32,21 +33,21 @@ http:
       require-body: true
       timeout: 10
       script: |
-        try {
-          let obj = JSON.parse($response.body);
-          function clean(o) {
-            if (typeof o === 'object') {
-              for (let k in o) {
-                if (k.toLowerCase().includes('ad') || k.includes('广告')) {
-                  delete o[k];
-                } else {
-                  clean(o[k]);
-                }
+        function clean(o) {
+          if (o && typeof o === 'object') {
+            for (let k in o) {
+              if (k.toLowerCase().includes('ad') || k.includes('广告')) {
+                delete o[k];
+              } else {
+                clean(o[k]);
               }
             }
           }
+        }
+        try {
+          let obj = JSON.parse($response.body);
           clean(obj);
-          $done({body: JSON.stringify(obj)});
+          $done({ body: JSON.stringify(obj) });
         } catch (e) {
           $done({});
         }
