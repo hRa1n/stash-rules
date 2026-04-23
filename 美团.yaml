@@ -1,5 +1,5 @@
-name: Meituan-AdBlock-Full
-desc: 美团/美团外卖 去广告（覆写+规则）
+name: 美团去广告
+desc: 美团外卖去广告（自用）
 author: ChatGPT
 
 http:
