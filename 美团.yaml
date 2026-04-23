@@ -1,0 +1,55 @@
+name: Meituan-AdBlock-Full
+desc: 美团/美团外卖 去广告（覆写+规则）
+author: ChatGPT
+
+http:
+  mitm:
+    - '*.meituan.com'
+    - '*.meituan.net'
+    - '*.dianping.com'
+
+  url-rewrite:
+    # 开屏广告
+    - ^https?:\/\/.*meituan.*\/launch.* - reject
+    - ^https?:\/\/.*meituan.*\/startup.* - reject
+
+    # 广告接口
+    - ^https?:\/\/.*meituan.*\/advert.* - reject
+    - ^https?:\/\/.*meituan.*\/ad\/.* - reject
+    - ^https?:\/\/.*meituan.*\/promotion\/.* - reject
+
+    # 弹窗/活动
+    - ^https?:\/\/.*meituan.*\/popup.* - reject
+    - ^https?:\/\/.*meituan.*\/activity\/.* - reject
+
+    # 闪屏/欢迎页
+    - ^https?:\/\/.*meituan.*\/splash.* - reject
+
+  script:
+    - match: ^https?:\/\/.*meituan.*\/api\/.*
+      name: mt_clean
+      type: response
+      require-body: true
+      timeout: 10
+      script: |
+        try {
+          let obj = JSON.parse($response.body);
+          function clean(o) {
+            if (typeof o === 'object') {
+              for (let k in o) {
+                if (k.toLowerCase().includes('ad') || k.includes('广告')) {
+                  delete o[k];
+                } else {
+                  clean(o[k]);
+                }
+              }
+            }
+          }
+          clean(obj);
+          $done({body: JSON.stringify(obj)});
+        } catch (e) {
+          $done({});
+        }
+
+rules:
+  - DOMAIN
