@@ -1,0 +1,15 @@
+name: MeiTuan Rewrite
+desc: 自用 美团域名拦截（rewrite版）
+author: blackmatrix7 + converted
+version: 1.0
+updated: 2026-04-24
+
+http:
+  url-rewrite:
+    - ^https?:\/\/([^\/]+\.)?dianping\.com(?:\/|$) - reject
+    - ^https?:\/\/([^\/]+\.)?maoyan\.com(?:\/|$) - reject
+    - ^https?:\/\/([^\/]+\.)?meituan\.com(?:\/|$) - reject
+    - ^https?:\/\/([^\/]+\.)?meituan\.net(?:\/|$) - reject
+    - ^https?:\/\/([^\/]+\.)?mtyun\.com(?:\/|$) - reject
+    - ^https?:\/\/([^\/]+\.)?neixin\.cn(?:\/|$) - reject
+    - ^https?:\/\/([^\/]+\.)?sankuai\.com(?:\/|$) - reject
