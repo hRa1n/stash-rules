@@ -1,8 +1,8 @@
 name: MeiTuan Rewrite
 desc: 自用 美团域名拦截（rewrite版）
-author: blackmatrix7 + converted
-version: 1.0
-updated: 2026-04-24
+#author: hrain
+#version: 1.0
+#updated: 2026-04-24
 
 http:
   url-rewrite:
