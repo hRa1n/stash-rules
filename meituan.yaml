@@ -2,4 +2,4 @@ rewrite:
   - match: ^https:\/\/ordercenter\.meituan\.com\/ordercenter\/user\/showOrderDetail
     type: response
     require-body: true
-    url: https://raw.githubusercontent.com/hRa1n/stash-rules/main/mt_clean.js
+    url: https://raw.githubusercontent.com/你的用户名/stash-rules/main/mt_clean.js
